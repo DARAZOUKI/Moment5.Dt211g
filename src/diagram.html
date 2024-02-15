@@ -1,12 +1,16 @@
+<!-- diagram.html -->
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="scss/main.scss">
-    <script src="javaScript.js" type="module"></script>
-    <title>Webb</title>
+    <script src="java.js"></script>
+    <script src="javascript.js" type="module"></script>
+    <title>Diagram</title>
 </head>
+
 <body>
     <header>
         <button class="menu-btn open" id="open-menu"  aria-label="Open Menu">
@@ -29,12 +33,22 @@
             <li><a href="sass.html">SASS</a></li>
         </ul>
     </nav>
-</header>
+    </header>
+
     <main>
-        <section class="content">
-            <img src="images/image1.jpg" alt="Image1">
-            <img src="images/image2.jpg" alt="Image2">
-        </section>
+        <h1>Diagram</h1>
+
+        <!-- Bar Chart -->
+        <div>
+            <h2>Stapeldiagram</h2>
+            <canvas id="barChart" width="400" height="400"></canvas>
+        </div>
+
+        <!-- Pie Chart -->
+        <div>
+            <h2>Cirkeldiagram</h2>
+            <canvas id="pieChart" width="400" height="400"></canvas>
+        </div>
     </main>
 
     <footer>
@@ -47,4 +61,5 @@
         </div>
     </footer>
 </body>
+
 </html>
