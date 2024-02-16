@@ -1,16 +1,16 @@
 
 // Import variables and mixins
-@import 'variables';
-@import 'mixins';
+@import '_variables';
+@import '_mixins';
 
 // Header styles
-@import 'partials/header';
+@import '_partials/_header';
 
 // Footer styles
-@import 'partials/footer';
+@import '_partials/_footer';
 
 // Animation styles
-@import 'partials/animations';
+@import '_partials/_animations';
 
 // Body styling
 body {
