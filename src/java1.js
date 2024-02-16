@@ -1,4 +1,4 @@
-// javascript.js
+"use strict"
 async function fetchAndDisplayMap() {
     const locationInput = document.getElementById('locationInput').value;
     const coordinates = await fetchCoordinates(locationInput);

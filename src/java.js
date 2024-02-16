@@ -1,6 +1,7 @@
-// java.js
+   "use strict"
+
 document.addEventListener("DOMContentLoaded", function () {
-    // Fetch data from the provided URL or your locally saved JSON file
+    // Fetch data 
     const fetchData = async () => {
         try {
             const response = await fetch('statistik_sokande.json');
@@ -65,9 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     };
 
-    // Fetch data and create charts when the DOM is loaded
+    // Fetch data and create charts
     fetchData().then(data => {
-        const coursesData = data.coursesData; // Adjust the property names based on your JSON structure
+        const coursesData = data.coursesData; 
         const programsData = data.programsData;
         createBarChart(coursesData);
         createPieChart(programsData);
