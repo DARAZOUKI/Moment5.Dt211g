@@ -33,7 +33,8 @@
     "postcss": "^8.4.35",
     "postcss-custom-properties": "^13.3.4",
     "sass": "^1.70.0",
+    "semver": "^7.6.0",
     "sharp": "^0.33.2",
-    "semver": "^7.6.0"
+    "chart.js": "^4.4.1"
   }
 }
