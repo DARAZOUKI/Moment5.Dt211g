@@ -146,8 +146,8 @@ function _fetchDataAndGenerateCharts() {
         case 6:
           data = _context.sent;
           if (data) {
-            coursesData = data.coursesData;
-            programsData = data.programsData;
+            coursesData = getTopCourses(data.coursesData, 6);
+            programsData = getTopPrograms(data.programsData, 5);
             createBarChart(coursesData);
             createPieChart(programsData);
           } else {
@@ -167,18 +167,37 @@ function _fetchDataAndGenerateCharts() {
   }));
   return _fetchDataAndGenerateCharts.apply(this, arguments);
 }
+function getTopCourses(coursesData, count) {
+  // Filter out programs from the coursesData array
+  var topCourses = coursesData.filter(function (course) {
+    return course.type === 'Kurs';
+  }).sort(function (a, b) {
+    return b.applicantsTotal - a.applicantsTotal;
+  }).slice(0, count);
+  return topCourses;
+}
+function getTopPrograms(programsData, count) {
+  // Sort the programsData array
+  var sortedPrograms = programsData.sort(function (a, b) {
+    return b.applicantsTotal - a.applicantsTotal;
+  });
+
+  // Take the top 'count' programs
+  var topPrograms = sortedPrograms.slice(0, count);
+  return topPrograms;
+}
 function createBarChart(coursesData) {
   var ctx = document.getElementById('barChart').getContext('2d');
   new Chart(ctx, {
     type: 'bar',
     data: {
       labels: coursesData.map(function (course) {
-        return course.courseName;
+        return course.name;
       }),
       datasets: [{
         label: 'Total Sökande',
         data: coursesData.map(function (course) {
-          return course.totalApplicants;
+          return course.applicantsTotal;
         }),
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
@@ -200,11 +219,11 @@ function createPieChart(programsData) {
     type: 'pie',
     data: {
       labels: programsData.map(function (program) {
-        return program.programName;
+        return program.name;
       }),
       datasets: [{
         data: programsData.map(function (program) {
-          return program.totalApplicants;
+          return program.applicantsTotal;
         }),
         backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'],
         borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
