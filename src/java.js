@@ -1,5 +1,4 @@
 "use strict";
-import Chart from 'chart.js/auto';
 
 document.addEventListener("DOMContentLoaded", function () {
     fetchDataAndGenerateCharts();
@@ -7,12 +6,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function fetchDataAndGenerateCharts() {
     try {
-        const response = await fetch('statistik_sokande.json');
+        const response = await fetch('src/statistik_sokande.json');
+        
         const data = await response.json();
 
         if (data) {
-            const coursesData = getTopCourses(data.coursesData, 6);
-            const programsData = getTopPrograms(data.programsData, 5);
+            const coursesData = getTopCourses(data, 6);
+            const programsData = getTopPrograms(data, 5);
+            
 
             createBarChart(coursesData);
             createPieChart(programsData);
@@ -24,24 +25,16 @@ async function fetchDataAndGenerateCharts() {
     }
 }
 
-function getTopCourses(coursesData, count) {
-    // Filter out programs from the coursesData array
-    const topCourses = coursesData
-        .filter(course => course.type === 'Kurs')
+function getTopCourses(data, count) {
+    return data.filter(item => item.type === 'Kurs')
         .sort((a, b) => b.applicantsTotal - a.applicantsTotal)
         .slice(0, count);
-
-    return topCourses;
 }
 
-function getTopPrograms(programsData, count) {
-    // Sort the programsData array
-    const sortedPrograms = programsData.sort((a, b) => b.applicantsTotal - a.applicantsTotal);
-
-    // Take the top 'count' programs
-    const topPrograms = sortedPrograms.slice(0, count);
-
-    return topPrograms;
+function getTopPrograms(data, count) {
+    return data.filter(item => item.type === 'Program')
+        .sort((a, b) => b.applicantsTotal - a.applicantsTotal)
+        .slice(0, count);
 }
 
 function createBarChart(coursesData) {
