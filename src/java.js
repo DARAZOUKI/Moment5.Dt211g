@@ -7,13 +7,11 @@ document.addEventListener("DOMContentLoaded", function () {
 async function fetchDataAndGenerateCharts() {
     try {
         const response = await fetch('src/statistik_sokande.json');
-        
         const data = await response.json();
 
         if (data) {
             const coursesData = getTopCourses(data, 6);
             const programsData = getTopPrograms(data, 5);
-            
 
             createBarChart(coursesData);
             createPieChart(programsData);
@@ -45,7 +43,7 @@ function createBarChart(coursesData) {
             labels: coursesData.map(course => course.name),
             datasets: [{
                 label: 'Total Sökande',
-                data: coursesData.map(course => course.applicantsTotal),
+                data: coursesData.map(course => parseInt(course.applicantsTotal)),
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
@@ -68,7 +66,7 @@ function createPieChart(programsData) {
         data: {
             labels: programsData.map(program => program.name),
             datasets: [{
-                data: programsData.map(program => program.applicantsTotal),
+                data: programsData.map(program => parseInt(program.applicantsTotal)),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
