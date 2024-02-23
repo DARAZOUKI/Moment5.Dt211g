@@ -1,4 +1,5 @@
 "use strict";
+import Chart from 'chart.js/auto';
 
 document.addEventListener("DOMContentLoaded", function () {
     fetchDataAndGenerateCharts();
@@ -6,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function fetchDataAndGenerateCharts() {
     try {
-        const response = await fetch('src/statistik_sokande.json');
+        const response = await fetch('statistik_sokande.json');
         const data = await response.json();
 
         if (data) {
