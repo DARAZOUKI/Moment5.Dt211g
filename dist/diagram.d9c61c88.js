@@ -579,13 +579,13 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"8iAxt":[function(require,module,exports) {
+"use strict";
 document.addEventListener("DOMContentLoaded", function() {
     fetchDataAndGenerateCharts();
 });
 async function fetchDataAndGenerateCharts() {
     try {
-        // Replace 'your_api_endpoint' with the actual API endpoint or file path
-        const response = await fetch("statistik_sokande.json");
+        const response = await fetch("https://studenter.miun.se/~mallar/dt211g/");
         const data = await response.json();
         if (data) {
             const coursesData = getTopCourses(data, 6);
@@ -620,7 +620,8 @@ function createBarChart(coursesData) {
                     beginAtZero: true,
                     onlyInteger: true
                 }
-            }
+            },
+            aspectRatio: 1
         }
     });
 }
@@ -651,18 +652,23 @@ function createPieChart(programsData) {
                     borderWidth: 1
                 }
             ]
+        },
+        options: {
+            aspectRatio: 2
         }
     });
 }
-// Placeholder function for getting top courses
+// function for getting top courses
 function getTopCourses(data, limit) {
-    // Assuming data is an array of courses with 'name' and 'applicantsTotal' properties
-    return data.sort((a, b)=>parseInt(b.applicantsTotal) - parseInt(a.applicantsTotal)).slice(0, limit);
+    // Filter only 'Kurs' type 
+    const kursData = data.filter((entry)=>entry.type === "Kurs");
+    return kursData.sort((a, b)=>b.applicantsTotal - a.applicantsTotal).slice(0, limit);
 }
-// Placeholder function for getting top programs
+// function for getting top programs
 function getTopPrograms(data, limit) {
-    // Assuming data is an array of programs with 'name' and 'applicantsTotal' properties
-    return data.sort((a, b)=>parseInt(b.applicantsTotal) - parseInt(a.applicantsTotal)).slice(0, limit);
+    // Filter only 'Program' type 
+    const programData = data.filter((entry)=>entry.type === "Program");
+    return programData.sort((a, b)=>b.applicantsTotal - a.applicantsTotal).slice(0, limit);
 }
 
 },{}]},["1J2BE","8iAxt"], "8iAxt", "parcelRequireaf2c")

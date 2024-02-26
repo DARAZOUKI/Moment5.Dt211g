@@ -74,3 +74,15 @@ body {
         color: $dark-text-color;
     }
 }
+#barChartContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  /* Adjust the height as needed */
+}
+
+@media screen and (max-width: 768px) {
+    #barChartContainer {
+        flex-direction: column;
+    }
+}

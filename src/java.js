@@ -1,4 +1,5 @@
 
+"use strict";
 
 document.addEventListener("DOMContentLoaded", function () {
     fetchDataAndGenerateCharts();
@@ -6,8 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function fetchDataAndGenerateCharts() {
     try {
-        // Replace 'your_api_endpoint' with the actual API endpoint or file path
-        const response = await fetch('statistik_sokande.json');
+        const response = await fetch('https://studenter.miun.se/~mallar/dt211g/');
         const data = await response.json();
 
         if (data) {
@@ -35,8 +35,8 @@ function createBarChart(coursesData) {
             datasets: [{
                 label: 'Total Applicants',
                 data: data,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Adjust as needed
-                borderColor: 'rgba(75, 192, 192, 1)', // Adjust as needed
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
             }]
         },
@@ -46,7 +46,9 @@ function createBarChart(coursesData) {
                     beginAtZero: true,
                     onlyInteger: true
                 }
-            }
+            },
+            aspectRatio: 1
+             
         }
     });
 }
@@ -67,7 +69,7 @@ function createPieChart(programsData) {
                     'rgba(54, 162, 235, 0.2)',
                     'rgba(75, 192, 192, 0.2)',
                     'rgba(153, 102, 255, 0.2)'
-                    // Add more colors as needed
+                    
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -75,26 +77,36 @@ function createPieChart(programsData) {
                     'rgba(54, 162, 235, 1)',
                     'rgba(75, 192, 192, 1)',
                     'rgba(153, 102, 255, 1)'
-                    // Add more colors as needed
+                    
                 ],
-                borderWidth: 1
+                borderWidth: 1,
+              
             }]
+        },
+        options: {
+            aspectRatio: 2
         }
     });
 }
-// Placeholder function for getting top courses
+
+// function for getting top courses
 function getTopCourses(data, limit) {
-    // Assuming data is an array of courses with 'name' and 'applicantsTotal' properties
-    return data
-        .sort((a, b) => parseInt(b.applicantsTotal) - parseInt(a.applicantsTotal))
+    // Filter only 'Kurs' type 
+    const kursData = data.filter(entry => entry.type === 'Kurs');
+    
+    return kursData
+        .sort((a, b) => b.applicantsTotal - a.applicantsTotal)
         .slice(0, limit);
 }
 
-// Placeholder function for getting top programs
+// function for getting top programs
 function getTopPrograms(data, limit) {
-    // Assuming data is an array of programs with 'name' and 'applicantsTotal' properties
-    return data
-        .sort((a, b) => parseInt(b.applicantsTotal) - parseInt(a.applicantsTotal))
+    // Filter only 'Program' type 
+    const programData = data.filter(entry => entry.type === 'Program');
+    
+    return programData
+        .sort((a, b) => b.applicantsTotal - a.applicantsTotal)
         .slice(0, limit);
 }
+
 

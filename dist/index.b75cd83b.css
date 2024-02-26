@@ -367,3 +367,16 @@ body {
   }
 }
 
+#barChartContainer {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  display: flex;
+}
+
+@media screen and (width <= 768px) {
+  #barChartContainer {
+    flex-direction: column;
+  }
+}
+
