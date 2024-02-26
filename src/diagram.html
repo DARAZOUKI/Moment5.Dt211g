@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="scss/main.scss">
-    <script src="java.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="javaScript.js" type="module"></script>
   
     <title>Diagram</title>
@@ -38,12 +38,12 @@
     <main>
         
             <h2>Stapeldiagram</h2>
-            <div class="ct-bar-chart"></div>
+            <div id="barChart" style="width: 400px; height: 300px;"></div>
             
             
       
             <h2>Cirkeldiagram</h2>
-            <div class="ct-pie-chart"></div>
+            <div id="pieChart" style="width: 400px; height: 300px;"></div>
     
     </main>
 
@@ -56,6 +56,7 @@
             <a href="#" aria-label="linkedin"><img src="images/icons8-linkedin-circled-48.png" alt="linkedin"></a>
         </div>
     </footer>
+    <script src="java.js" type="module"></script>
 </body>
 
 </html>
